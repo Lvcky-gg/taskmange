@@ -9,5 +9,5 @@ public interface TaskRepository {
     Task findById(int taskId) throws DataAccessException;
     Task create(Task task) throws DataAccessException;
     boolean update(Task task) throws DataAccessException;
-    boolean delete(int taskId);
+    boolean delete(int taskId) throws DataAccessException;
 }

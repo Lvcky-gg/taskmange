@@ -74,7 +74,15 @@ public class TaskFIleRepository implements TaskRepository {
     }
 
     @Override
-    public boolean delete(int taskId) {
+    public boolean delete(int taskId) throws DataAccessException {
+        List<Task>all = findAll();
+        for(int i = 0; i < all.size(); i++){
+            if(all.get(i).getId() == taskId){
+                all.remove(i);
+                writeToFile(all);
+                return true;
+            }
+        }
         return false;
     }
 
