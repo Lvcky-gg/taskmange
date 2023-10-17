@@ -1,7 +1,9 @@
 package learn.learn.TaskManager.data;
 
+import learn.learn.TaskManager.models.Status;
 import learn.learn.TaskManager.models.Task;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 public class TaskFIleRepository implements TaskRepository {
@@ -44,5 +46,37 @@ public class TaskFIleRepository implements TaskRepository {
     }
     private String clean(String value){
         return  value.replace(DELIMITER,DELILIMITER_REPLACEMENT);
+    }
+    //deserialize data
+    private Task lineToTask(String line){
+        String[] fields = line.split(DELIMITER);
+        if(fields.length != 6){
+            return null;
+        }
+        Task task = new Task(
+                Integer.parseInt(fields[0]),
+                restore(fields[1]),
+                restore(fields[2]),
+                restore(fields[3]),
+                restore(fields[4]),
+                Status.valueOf(fields[5])
+        );
+        return task;
+    }
+    //serialize
+    private String taskToLine(Task task){
+        StringBuilder buffer = new StringBuilder(100);
+        buffer.append(task.getId()).append(DELIMITER);
+        buffer.append(clean(task.getCreatedOn())).append(DELIMITER);
+        buffer.append(clean(task.getTitle())).append(DELIMITER);
+        buffer.append(clean(task.getDescription())).append(DELIMITER);
+        buffer.append(clean(task.getDueDate())).append(DELIMITER);
+        buffer.append(task.getStatus());
+        return buffer.toString();
+    }
+    private void WriteToFile(List<Task> task){
+        try(PrintWriter writer = new PrintWriter(filePath)){
+
+        }
     }
 }
