@@ -121,4 +121,13 @@ class TaskFIleRepositoryTest {
         boolean res = repository.update(task);
         assertFalse(res);
     }
+    @Test
+    public void shouldDelete() throws DataAccessException {
+        boolean res = repository.delete(1);
+        assertTrue(res);
+        List<Task> all = repository.findAll();
+        assertEquals(2, all.size());
+        Task task = repository.findById(1);
+        assertNull(task);
+    }
 }
