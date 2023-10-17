@@ -99,4 +99,26 @@ class TaskFIleRepositoryTest {
         assertEquals(Status.TODO, actual.getStatus());
 
     }
+
+    @Test
+    public void shouldUpdate() throws DataAccessException {
+        Task task = repository.findById(1);
+        task.setStatus(Status.IN_PROGRESS);
+        task.setDescription("CHECK");
+        boolean res = repository.update(task);
+        assertTrue(res);
+        assertNotNull(task);
+        assertEquals(1, task.getId());
+        assertEquals("2023-10-08", task.getCreatedOn());
+        assertEquals("Review Curriculum", task.getTitle());
+        assertEquals("CHECK", task.getDescription());
+        assertEquals("2023-10-10", task.getDueDate());
+        assertEquals(Status.IN_PROGRESS, task.getStatus());
+    }
+    @Test
+    public void shouldNotUpdateUnknown() throws DataAccessException {
+        Task task = new Task(99999, "","","","",Status.TODO);
+        boolean res = repository.update(task);
+        assertFalse(res);
+    }
 }
