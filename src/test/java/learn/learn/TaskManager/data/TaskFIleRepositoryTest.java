@@ -130,4 +130,11 @@ class TaskFIleRepositoryTest {
         Task task = repository.findById(1);
         assertNull(task);
     }
+
+    @Test
+    public void shouldNotDeleteUnknown() throws DataAccessException {
+        boolean res = repository.delete(9999);
+        assertFalse(res);
+
+    }
 }
