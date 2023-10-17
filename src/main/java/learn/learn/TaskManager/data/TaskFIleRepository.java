@@ -61,7 +61,15 @@ public class TaskFIleRepository implements TaskRepository {
     }
 
     @Override
-    public boolean update(Task task) {
+    public boolean update(Task task) throws DataAccessException {
+        List<Task>all = findAll();
+        for(int i = 0; i < all.size(); i++){
+            if(all.get(i).getId() == task.getId()){
+                all.set(i, task);
+                writeToFile(all);
+                return true;
+            }
+        }
         return false;
     }
 
