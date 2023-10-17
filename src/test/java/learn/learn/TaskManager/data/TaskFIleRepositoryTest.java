@@ -37,4 +37,15 @@ class TaskFIleRepositoryTest {
       assertEquals("2023-10-10", task.getDueDate());
       assertEquals(Status.TODO, task.getStatus());
   }
+    @Test
+    public void shouldFindById() throws DataAccessException {
+        Task taskOne = repository.findById(1);
+        assertNotNull(taskOne);
+        assertEquals(1, taskOne.getId());
+        assertEquals("2023-10-08", taskOne.getCreatedOn());
+        assertEquals("Review Curriculum", taskOne.getTitle());
+        assertEquals("check content for spelling and grammar", taskOne.getDescription());
+        assertEquals("2023-10-10", taskOne.getDueDate());
+        assertEquals(Status.TODO, taskOne.getStatus());
+    }
 }
