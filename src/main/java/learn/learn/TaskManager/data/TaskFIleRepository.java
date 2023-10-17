@@ -3,6 +3,7 @@ package learn.learn.TaskManager.data;
 import learn.learn.TaskManager.models.Status;
 import learn.learn.TaskManager.models.Task;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -74,9 +75,26 @@ public class TaskFIleRepository implements TaskRepository {
         buffer.append(task.getStatus());
         return buffer.toString();
     }
-    private void WriteToFile(List<Task> task){
+    private void WriteToFile(List<Task> tasks) throws DataAccessException {
         try(PrintWriter writer = new PrintWriter(filePath)){
+            writer.println("id,createdOn,title,description,dueDate,status");
+            for(Task task : tasks){
+                String line = taskToLine(task);
+                writer.println(line);
+            }
 
+        }catch(IOException ex){
+            throw new DataAccessException("Could not write to filepath" + filePath);
         }
+    }
+
+    private int getNextId(List<Task> tasks){
+        int maxId = 0;
+        for(Task task:tasks){
+            if(maxId < task.getId()){
+                maxId = task.getId();
+            }
+        }
+        return maxId +1;
     }
 }
