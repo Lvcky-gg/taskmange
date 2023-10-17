@@ -1,0 +1,8 @@
+id,createdOn,title,description,dueDate,status
+1,2023-10-08,Review Curriculum,check content for spelling and grammar,2023-10-10,TODO
+2,2023-10-03,Water Plants,water the indoor houseplants,2023-20-08,COMPLETE
+3,2023-09-08,Walk Dogs,take dogs for long walk on the beach,2023-09-27,COMPLETE
+4,2023-09-20,Grocery Shopping,Finish weekly shopping for meal prep,2023-09-27,COMPLETE
+5,2023-10-08,Vacation Planning,Plan vacation to Italy for next summer - book flights and hotels early,2023-11-01,IN_PROGRESS
+
+
