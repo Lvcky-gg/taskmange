@@ -48,4 +48,9 @@ class TaskFIleRepositoryTest {
         assertEquals("2023-10-10", taskOne.getDueDate());
         assertEquals(Status.TODO, taskOne.getStatus());
     }
+    @Test
+    public void shouldNotFindNonExistingId() throws DataAccessException {
+        Task task = repository.findById(100000000);
+        assertNull(task);
+    }
 }
