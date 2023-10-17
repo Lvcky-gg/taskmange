@@ -3,8 +3,8 @@ package learn.learn.TaskManager.data;
 import learn.learn.TaskManager.models.Status;
 import learn.learn.TaskManager.models.Task;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskFIleRepository implements TaskRepository {
@@ -17,8 +17,24 @@ public class TaskFIleRepository implements TaskRepository {
         this.filePath = filePath;
     }
     @Override
-    public List<Task> findAll() {
-        return null;
+    public List<Task> findAll() throws DataAccessException {
+        //create list of tasks
+        List<Task> result = new ArrayList<>();
+
+        try(BufferedReader reader = new BufferedReader(new FileReader(filePath))){
+            reader.readLine();
+            for(String line = reader.readLine(); line != null; line = reader.readLine()){
+                Task task = lineToTask(line);
+                result.add(task);
+            }
+
+        }catch(FileNotFoundException ex){
+            //blank
+        }catch (IOException ex){
+            throw new DataAccessException("Could not find path"+filePath);
+        }
+
+        return result;
     }
 
     @Override

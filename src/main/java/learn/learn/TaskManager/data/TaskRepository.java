@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface TaskRepository {
     //crud
-    List<Task> findAll();
+    List<Task> findAll() throws DataAccessException;
     Task findById(int taskId);
     Task create(Task task);
     boolean update(Task task);
