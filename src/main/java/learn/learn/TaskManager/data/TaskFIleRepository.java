@@ -49,8 +49,15 @@ public class TaskFIleRepository implements TaskRepository {
     }
 
     @Override
-    public Task create(Task task) {
-        return null;
+    public Task create(Task task) throws DataAccessException {
+        List<Task>all = findAll();
+
+        int nextId = getNextId(all);
+        task.setId(nextId);
+
+        all.add(task);
+        writeToFile(all);
+        return task;
     }
 
     @Override
@@ -97,7 +104,7 @@ public class TaskFIleRepository implements TaskRepository {
         buffer.append(task.getStatus());
         return buffer.toString();
     }
-    private void WriteToFile(List<Task> tasks) throws DataAccessException {
+    private void writeToFile(List<Task> tasks) throws DataAccessException {
         try(PrintWriter writer = new PrintWriter(filePath)){
             writer.println("id,createdOn,title,description,dueDate,status");
             for(Task task : tasks){
