@@ -53,4 +53,50 @@ class TaskFIleRepositoryTest {
         Task task = repository.findById(100000000);
         assertNull(task);
     }
+
+    @Test
+    public void shouldCreateTask() throws DataAccessException {
+        Task task = new Task(
+                0,
+                "2024-02-01",
+                "TEST",
+                "TEST",
+                "2024-02-05",
+                Status.TODO
+        );
+        Task actual = repository.create(task);
+        assertEquals(4, actual.getId());
+
+        List<Task> all = repository.findAll();
+        assertEquals(4, all.size());
+
+        assertEquals("2024-02-01", actual.getCreatedOn());
+        assertEquals("TEST", actual.getTitle());
+        assertEquals("TEST", actual.getDescription());
+        assertEquals("2024-02-05", actual.getDueDate());
+        assertEquals(Status.TODO, actual.getStatus());
+    }
+    @Test
+    public void shouldCreateWithCommas() throws DataAccessException {
+        Task task = new Task(
+                0,
+                "2024-02-01",
+                "TEST",
+                "TEST",
+                "2024-02-05",
+                Status.TODO
+        );
+        Task actual = repository.create(task);
+        assertEquals(4, actual.getId());
+
+        List<Task> all = repository.findAll();
+        assertEquals(4, all.size());
+
+        assertEquals("2024-02-01", actual.getCreatedOn());
+        assertEquals("TEST", actual.getTitle());
+        assertEquals("TEST", actual.getDescription());
+        assertEquals("2024-02-05", actual.getDueDate());
+        assertEquals(Status.TODO, actual.getStatus());
+
+    }
 }
