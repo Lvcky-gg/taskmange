@@ -44,6 +44,14 @@ public class TaskService {
             results.addMessage("Created on date is required");
             return results;
         }
+        if (task.getTitle() == null || task.getTitle().isBlank() || task.getTitle().length() > 50){
+            results.addMessage("Title must exist and cannot be longer than 50 characters.");
+            return results;
+        }
+        if(task.getDescription().isBlank() || task.getDescription().length() < 20 || task.getDescription() == null){
+            results.addMessage("Description is required and must be more than 20 characters.");
+            return results;
+        }
 
         return results;
     }
