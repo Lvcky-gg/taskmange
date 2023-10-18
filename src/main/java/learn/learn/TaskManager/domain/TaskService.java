@@ -39,6 +39,26 @@ public class TaskService {
         return res;
     }
 
+    public TaskResults update(Task task) throws DataAccessException {
+        TaskResults res = validate(task);
+        if(!res.isSuccess()){
+            return res;
+        }
+        boolean updated = repository.update(task);
+        if(!updated){
+            res.addMessage(String.format("Task with id %s does not exist", task.getId()));
+        }
+        return res;
+    }
+
+    public TaskResults deleteById(int taskId) throws DataAccessException {
+        TaskResults res = new TaskResults();
+        if(!repository.delete(taskId)){
+            res.addMessage(String.format("Task with id %s does not exist", taskId));
+        }
+        return res;
+    }
+
 
 
 
