@@ -18,21 +18,28 @@ public class TaskRepositoryDouble implements TaskRepository{
 
     @Override
     public Task findById(int taskId) throws DataAccessException {
+        for (Task task : findAll()){
+            if(task.getId() == taskId){
+                return task;
+            }
+        }
         return null;
     }
 
     @Override
     public Task create(Task task) throws DataAccessException {
+        task.setId(99);
         return null;
     }
 
     @Override
     public boolean update(Task task) throws DataAccessException {
-        return false;
+
+        return task.getId() >0;
     }
 
     @Override
     public boolean delete(int taskId) throws DataAccessException {
-        return false;
+        return taskId != 999;
     }
 }
