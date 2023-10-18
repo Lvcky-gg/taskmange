@@ -26,7 +26,11 @@ class TaskServiceTest {
 
     }
     @Test
-    public void shouldNotCreateNullTask(){
+    public void shouldNotCreateNullTask() throws DataAccessException {
+        TaskResults act = service.create(null);
+        assertFalse(act.isSuccess());
+        assertNull(act.getTask());
+        assertEquals("Task cannot be null", act.getMessages().get(0));
 
     }
     @Test
