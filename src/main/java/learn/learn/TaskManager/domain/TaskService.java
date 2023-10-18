@@ -21,6 +21,8 @@ public class TaskService {
     }
 
 
+
+
     /*
     cannot add a task with id > 0
     we need to check
@@ -31,4 +33,19 @@ public class TaskService {
 
     let the user know upon failures
     * */
+
+    public TaskResults validate(Task task){
+        TaskResults results = new TaskResults();
+        if(task == null){
+            results.addMessage("Task cannot be null");
+            return results;
+        }
+        if(task.getCreatedOn() == null || task.getCreatedOn().isBlank()){
+            results.addMessage("Created on date is required");
+            return results;
+        }
+
+        return results;
+    }
+
 }

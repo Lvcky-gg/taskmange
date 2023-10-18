@@ -27,4 +27,6 @@ public class TaskResults {
     public boolean isSuccess(){
         return messages.size() == 0;
     }
+
+
 }
