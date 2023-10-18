@@ -52,6 +52,14 @@ public class TaskService {
             results.addMessage("Description is required and must be more than 20 characters.");
             return results;
         }
+        if(task.getDueDate() == null || task.getDueDate().isBlank()){
+            results.addMessage(" Due date is required.");
+            return results;
+        }
+        if(task.getStatus() == null){
+            results.addMessage("Status is required.");
+            return results;
+        }
 
         return results;
     }
