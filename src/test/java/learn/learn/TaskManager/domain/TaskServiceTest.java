@@ -34,6 +34,17 @@ class TaskServiceTest {
 
     }
     @Test
+    public void shouldNotCreateTaskWithoutStartDate() throws DataAccessException {
+        TaskResults act = service.create( new Task(0, "","qweqwe",
+                "prepare apple slices and snack for soccer game", "20223-05-11", Status.COMPLETE));
+
+        assertFalse(act.isSuccess());
+        assertNull(act.getTask());
+        assertEquals("Created on date is required", act.getMessages().get(0));
+
+    }
+
+    @Test
     public void shouldNotCreateTaskWithoutTitle() throws DataAccessException {
         TaskResults act = service.create( new Task(0, "2023-05-09","",
                 "prepare apple slices and snack for soccer game", "20223-05-11", Status.COMPLETE));
