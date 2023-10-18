@@ -20,6 +20,25 @@ public class TaskService {
         return repository.findById(taskId);
     }
 
+    public TaskResults create(Task task) throws DataAccessException {
+        TaskResults res = validate(task);
+        if(!res.isSuccess()){
+            return res;
+        }
+        if(task == null){
+            res.addMessage("Task cannot be null.");
+            return res;
+        }
+        if(task.getId() > 0){
+            res.addMessage("Cannot create existing task");
+            return res;
+        }
+
+        task = repository.create(task);
+        res.setTask(task);
+        return res;
+    }
+
 
 
 
