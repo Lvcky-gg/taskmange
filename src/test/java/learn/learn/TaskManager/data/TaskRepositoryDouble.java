@@ -29,7 +29,7 @@ public class TaskRepositoryDouble implements TaskRepository{
     @Override
     public Task create(Task task) throws DataAccessException {
         task.setId(99);
-        return null;
+        return task;
     }
 
     @Override

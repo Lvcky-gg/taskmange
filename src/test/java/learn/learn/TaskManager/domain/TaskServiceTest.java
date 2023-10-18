@@ -16,7 +16,33 @@ class TaskServiceTest {
     TaskService service = new TaskService(repo);
 
     @Test
-    public void shouldCreateTask(){
+    public void shouldCreateTask() throws DataAccessException {
+        TaskResults act = service.create(new Task(0, "2023-05-09","Prepare Snacks",
+                "prepare apple slices and snack for soccer game", "20223-05-11", Status.COMPLETE));
+        assertNotNull(act.getTask());
+        assertTrue(act.isSuccess());
+        assertEquals(99, act.getTask().getId());
+
+
+    }
+    @Test
+    public void shouldNotCreateNullTask(){
+
+    }
+    @Test
+    public void shouldNotCreateTaskWithoutTitle(){
+
+    }
+    @Test
+    public void shouldNotCreateTaskTitleLongerThan50(){
+
+    }
+    @Test
+    public void shouldNotCreateTaskWithoutDescription(){
+
+    }
+    @Test
+    public void shouldNotCreateTaskWithDescOver20Chars(){
 
     }
     @Test
@@ -53,6 +79,7 @@ class TaskServiceTest {
         assertNull(task);
 
     }
+
 
 
 
