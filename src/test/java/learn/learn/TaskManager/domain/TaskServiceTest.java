@@ -118,6 +118,51 @@ class TaskServiceTest {
         assertNull(task);
 
     }
+    @Test
+    public void shouldUpdateExistingTask() throws DataAccessException {
+        List<Task> all = service.findALl();
+        Task toUpdate = all.get(0);
+        toUpdate.setDescription("this is an updated task description, testing, testing, testing");
+
+        TaskResults act = service.update(toUpdate);
+        assertTrue(act.isSuccess());
+        assertEquals(0, act.getMessages().size());
+        assertEquals("this is an updated task description, testing, testing, testing", all.get(0).getDescription());
+
+    }
+    @Test
+    public void shouldNotUpdateNonExistingId() throws DataAccessException {
+        Task task = new Task(0, "2023-08-01","Fake","This is a fake description whith at least 20 characters","2024-01-22",Status.TODO);
+        TaskResults act = service.update(task);
+
+        assertFalse(act.isSuccess());
+        assertEquals(1, act.getMessages().size());
+        assertTrue(act.getMessages().get(0).contains("does not exist"));
+
+    }
+//    @Test
+//    public void shouldNotUpdateNullTask() throws DataAccessException {
+//        TaskResults act = service.update(null);
+//
+//        assertFalse(act.isSuccess());
+//        assertEquals(1, act.getMessages().size());
+//        assertTrue(act.getMessages().get(0).contains("cannot be null"));
+//
+//    }
+    @Test
+    public void shouldDeleteExisting() throws DataAccessException {
+        TaskResults act = service.deleteById(1);
+        assertTrue(act.isSuccess());
+
+
+    }
+    @Test
+    public void shouldNotDeleteNonExisting() throws DataAccessException {
+        TaskResults act = service.deleteById(9999999);
+        assertFalse(act.isSuccess());
+        assertEquals(1, act.getMessages().size());
+        assertTrue(act.getMessages().get(0).contains("does not"));
+    }
 
 
 
