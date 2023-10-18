@@ -1,13 +1,19 @@
 package learn.learn.TaskManager.data;
 
+import learn.learn.TaskManager.models.Status;
 import learn.learn.TaskManager.models.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskRepositoryDouble implements TaskRepository{
     @Override
     public List<Task> findAll() throws DataAccessException {
-        return null;
+        List<Task> all = new ArrayList<>();
+        all.add(new Task(1,"2024-08-01", "Bake Cake", "bake cake for rover's birthday", "2024-08-22", Status.TODO));
+        all.add(new Task(2,"2024-08-01", "Bake Cake", "bake cake for rover's birthday", "2024-08-22", Status.TODO));
+        all.add(new Task(3,"2024-08-01", "Bake Cake", "bake cake for rover's birthday", "2024-08-22", Status.TODO));
+        return all;
     }
 
     @Override
