@@ -34,7 +34,13 @@ class TaskServiceTest {
 
     }
     @Test
-    public void shouldNotCreateTaskWithoutTitle(){
+    public void shouldNotCreateTaskWithoutTitle() throws DataAccessException {
+        TaskResults act = service.create( new Task(0, "2023-05-09","",
+                "prepare apple slices and snack for soccer game", "20223-05-11", Status.COMPLETE));
+
+        assertFalse(act.isSuccess());
+        assertNull(act.getTask());
+        assertEquals("Title must exist and cannot be longer than 50 characters.", act.getMessages().get(0));
 
     }
     @Test
