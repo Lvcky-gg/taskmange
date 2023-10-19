@@ -21,16 +21,31 @@ public class View {
 
     public Task makeTask(){
 
+        Task res = new Task();
+        res.setCreatedOn(readString("Enter today's date: "));
+        res.setTitle(readString("Enter Title: "));
+        res.setDescription(readString("Enter description: "));
+        res.setDueDate(readString("Enter due date: "));
+        res.setStatus(readStatus("Enter Status: "));
+        return res;
     }
-    public void displayTasks(List<Task> tasks){
-
+    public void displayTasks(List<Task> tasks) {
+              for (Task task : tasks){
+            displayText(String.format(
+                    "id: %s%n date: %s%n title: %s%n description: %s%n due date: %s%n status: %s%n",
+            task.getId(),
+            task.getCreatedOn(),
+                    task.getTitle(),
+                    task.getDescription(),
+                    task.getDueDate(),
+                    task.getStatus()));
+        }
     }
     public int updateById(){
-        displayText("which ID you wou like to modify?");
-        int id = readInt("Enter the ID",1,999);
+        displayText("Which Id would you like to modify?");
+        int id = readInt("Enter id: ", 1, 999999);
         return id;
     }
-
 
     public void displayHeader(String header){
         System.out.println();
