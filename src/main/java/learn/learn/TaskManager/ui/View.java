@@ -20,6 +20,7 @@ public class View {
     }
 
     public Task makeTask(){
+
         Task res = new Task();
         res.setCreatedOn(readString("Enter today's date: "));
         res.setTitle(readString("Enter Title: "));
@@ -29,14 +30,22 @@ public class View {
         return res;
     }
     public void displayTasks(List<Task> tasks) {
+              for (Task task : tasks){
+            displayText(String.format(
+                    "id: %s%n date: %s%n title: %s%n description: %s%n due date: %s%n status: %s%n",
+            task.getId(),
+            task.getCreatedOn(),
+                    task.getTitle(),
+                    task.getDescription(),
+                    task.getDueDate(),
+                    task.getStatus()));
+        }
     }
     public int updateById(){
         displayText("Which Id would you like to modify?");
         int id = readInt("Enter id: ", 1, 999999);
         return id;
     }
-
-
 
     public void displayHeader(String header){
         System.out.println();
