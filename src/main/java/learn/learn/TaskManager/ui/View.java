@@ -15,6 +15,7 @@ public class View {
         displayText("3. update a task.");
         displayText("4. delete a task.");
         displayText("5. exit");
+        return readInt("What would you like to d0?[1-5]",1,5);
     }
 
     public void displayHeader(String header){
