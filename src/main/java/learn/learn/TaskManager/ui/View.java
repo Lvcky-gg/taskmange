@@ -1,6 +1,7 @@
 package learn.learn.TaskManager.ui;
 
 import learn.learn.TaskManager.models.Status;
+import learn.learn.TaskManager.models.Task;
 
 import java.util.List;
 import java.util.Scanner;
@@ -17,6 +18,19 @@ public class View {
         displayText("5. exit");
         return readInt("What would you like to d0?[1-5]",1,5);
     }
+
+    public Task makeTask(){
+
+    }
+    public void displayTasks(List<Task> tasks){
+
+    }
+    public int updateById(){
+        displayText("which ID you wou like to modify?");
+        int id = readInt("Enter the ID",1,999);
+        return id;
+    }
+
 
     public void displayHeader(String header){
         System.out.println();
