@@ -18,6 +18,14 @@ public class Controller {
     }
 
     public void run(){
+        view.displayHeader("Welcome to task manager");
+        try{
+            runMenu();
+        }catch (DataAccessException e){
+            view.displayText("Fatal Error");
+            view.displayText(e.getMessage());
+        }
+        view.displayText("Goodbye");
 
     }
 
@@ -77,7 +85,17 @@ public class Controller {
         }
 
     }
-    private void deleteTask(){
+    private void deleteTask() throws DataAccessException {
+        view.displayHeader("Delete a task");
+        Task task = service.findById(view.updateById());
+        if(task != null){
+            TaskResults res = service.deleteById(task.getId());
+            if(res.isSuccess()){
+                view.displayText("Your task was successfully deleted");
+            }
+        }else{
+            view.displayErrors(List.of("There are no tasks with this id"));
+        }
 
     }
 }
