@@ -52,7 +52,7 @@ public class View {
         System.out.println(header);
         System.out.println("*".repeat(header.length()));
     }
-
+//fixed
     public void displayText(String line){
         System.out.println();
         System.out.println(line);
