@@ -8,4 +8,8 @@ public enum Status {
      Status(String displayText){
          this.displayText = displayText;
      }
+
+    public String getDisplayText() {
+        return displayText;
+    }
 }
